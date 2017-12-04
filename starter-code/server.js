@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// TODO DONE!!: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
 
 const fs = require('fs');
 const express = require('express');
@@ -10,35 +10,37 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string (conString) for the URL that will connect to your local Postgres database.
+// TODO DONE: Complete the connection string (conString) for the URL that will connect to your local Postgres database.
 
 // Windows and Linux users: You should have retained the user/password from the pre-work for this course.
 // Your OS may require that your conString is composed of additional information including user and password.
-// const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
+const conString = 'postgres://postgres:jenny@HOST:5432/kilovolt';
 
 // Mac:
 // const conString = 'postgres://localhost:5432';
 
 
-// TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
+// TODO DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
 
-const client = new pg.Client('something needs to go here... read the instructions above!');
+const client = new pg.Client('postgres://postgres:jenny@HOST:5432/kilovolt');
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
 
 
-// REVIEW: Install the middleware plugins so that our app can use the body-parser module.
+// REVIEW DONE: Install the middleware plugins so that our app can use the body-parser module.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
 
-// REVIEW: Routes for requesting HTML resources
+// REVIEW DONE: Routes for requesting HTML resources
 app.get('/new', (request, response) => {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-    // PUT YOUR RESPONSE HERE
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // This is a request to the server from the client, #2.
+    // There is no method in article.js, this GET request is the same as the client typing into the browser a https://..../ new.html.
+    // The part of CRUD being enacted for the .get is R for READ. 
     response.sendFile('new.html', {root: './public'});
 });
 
