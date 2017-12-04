@@ -37,8 +37,8 @@
     "no-var": "warn",
     "prefer-const": "warn",
 
-    "eqeqeq": ["error", "always"],
-    "no-template-curly-in-string": "error",
+    // "eqeqeq": ["error", "always"],
+    // "no-template-curly-in-string": "error",
 
     "new-cap": "warn",
     "no-redeclare": ["error", { "builtinGlobals": true }]

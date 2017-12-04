@@ -15,11 +15,11 @@ const app = express();
 
 // Windows and Linux users: You should have retained the user/password from the pre-work for this course.
 // Your OS may require that your conString is composed of additional information including user and password.
-// const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
+const conString = 'postgres://:password@localhost:5432/kilovolt';
 
 // Mac:
 // const conString = 'postgres://localhost:5432';
-const conString = 'postgress://@localhost:5432/kilovolt';
+// const conString = 'postgress://@localhost:5432/kilovolt';
 
 
 // TODO DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
@@ -163,10 +163,10 @@ app.listen(PORT, () => {
 //////// ** DATABASE LOADER ** ////////
 ////////////////////////////////////////
 function loadArticles() {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // 1. 3A (server sends query to db), 4B (server receives the newly selected table from db), 3A (server sends another query to fill the articles table with each article from the json)
-    // 2. Article.truncateTable
-    // 3. Delete for the delete request. derp.
+    // 2. Trick question it's loadDB(); that is calling loadArticles.
+    // 3. Create due to the insert into query.
     client.query('SELECT COUNT(*) FROM articles')
         .then(result => {
             // REVIEW: result.rows is an array of objects that Postgres returns as a response to a query.
@@ -189,8 +189,10 @@ function loadArticles() {
 }
 
 function loadDB() {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-    // PUT YOUR RESPONSE HERE
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // 1. 3A (server sends query to db), 4B (server is receiving the ok that create table finished) and then it does all the stuff load articles does. Sweet.
+    // 2. Trick question it's not attached to article.js it is called within server.js
+    // 3. Create due to the CREATE TABLE
     client.query(`
       CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
