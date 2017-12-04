@@ -118,7 +118,7 @@ app.put('/articles/:id', (request, response) => {
 app.delete('/articles/:id', (request, response) => {
     // COMMENT-DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
-    //118 to 124 is 3A server to database, lines 126-131 is 5A, server to client. deleteRecord is code interacting with this section.  This would be DELETE.  
+    //118 to 124 is 3A server to database, lines 126-131 is 5A, server to client. deleteRecord is code interacting with this section.  This would be DELETE.
     client.query(
         `DELETE FROM articles WHERE article_id=$1;`,
         [request.params.id]
