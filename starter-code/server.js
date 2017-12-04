@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// TODO DONE: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
 
 const fs = require('fs');
 const express = require('express');
@@ -10,7 +10,10 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string (conString) for the URL that will connect to your local Postgres database.
+// TODO NEED DB NAME: Complete the connection string (conString) for the URL that will connect to your local Postgres database.
+const pg = require('pg');
+
+//'postgress://postgres:1234@localhost:5432/')
 
 // Windows and Linux users: You should have retained the user/password from the pre-work for this course.
 // Your OS may require that your conString is composed of additional information including user and password.
@@ -23,7 +26,7 @@ const app = express();
 // TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
 
-const client = new pg.Client('something needs to go here... read the instructions above!');
+const client = new pg.Client('postgress://postgres:1234@localhost:5432/');
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -39,6 +42,7 @@ app.use(express.static('./public'));
 app.get('/new', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+    //Line 46 would be 5b, the server sending file back to client. There is no method in article.js interacting with line 42.  This would be a request from typing in address in browser.  This would be 'read' since it is just sending a file back to the client.
     response.sendFile('new.html', {root: './public'});
 });
 
