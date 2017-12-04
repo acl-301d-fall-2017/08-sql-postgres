@@ -47,8 +47,11 @@ app.get('/new', (request, response) => {
 
 // REVIEW: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', (request, response) => {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-    // PUT YOUR RESPONSE HERE
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // .query is the server making a request to the database, #3.
+    // The method in Article.js is the Article.fetchAll on line 32.
+    // The part of CRUD that is being enacted is R for READ. 
+
     client.query('SELECT * FROM articles')
         .then(function(result) {
             response.send(result.rows);
@@ -59,8 +62,10 @@ app.get('/articles', (request, response) => {
 });
 
 app.post('/articles', (request, response) => {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-    // PUT YOUR RESPONSE HERE
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // client.query is represented by #3, .then is then sending the query back to the server, #4.
+    // the method in article.js that interacts with this function is Article.prototype.insertRecord on line 56.
+    // The part of CRUD that is being enacted is CREATE.
     client.query(
         `INSERT INTO
         articles(title, author, "authorUrl", category, "publishedOn", body)
