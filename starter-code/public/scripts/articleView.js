@@ -85,10 +85,9 @@ articleView.initNewArticlePage = () => {
 };
 
 articleView.create = () => {
-    let article;
     $('#articles').empty();
 
-    article = new Article({
+    const article = new Article({
         title: $('#article-title').val(),
         author: $('#article-author').val(),
         authorUrl: $('#article-author-url').val(),
