@@ -26,7 +26,7 @@ const pg = require('pg');
 // TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
 
-const client = new pg.Client('postgress://postgres:1234@localhost:5432/');
+const client = new pg.Client('postgress://postgres:1234@localhost:5432/articles');
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -40,7 +40,7 @@ app.use(express.static('./public'));
 
 // REVIEW: Routes for requesting HTML resources
 app.get('/new', (request, response) => {
-    // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+    // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
     //Line 46 would be 5b, the server sending file back to client. There is no method in article.js interacting with line 42.  This would be a request from typing in address in browser.  This would be 'read' since it is just sending a file back to the client.
     response.sendFile('new.html', {root: './public'});
@@ -51,6 +51,7 @@ app.get('/new', (request, response) => {
 app.get('/articles', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+    //It is 3A. The fetchAll method is doing the request. Read, because it is just reading a query selection of data from database.
     client.query('SELECT * FROM articles')
         .then(function(result) {
             response.send(result.rows);
@@ -63,6 +64,7 @@ app.get('/articles', (request, response) => {
 app.post('/articles', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+    //Line 68-80 is 3A, it is adding new data to database.  80-88 would be 5A, it is sending a response back to the client. It is the insertRecord method that is making this post request. Creatte is the part of CRUD being used.  It's creating new article on the database.
     client.query(
         `INSERT INTO
         articles(title, author, "authorUrl", category, "publishedOn", body)
@@ -88,6 +90,7 @@ app.post('/articles', (request, response) => {
 app.put('/articles/:id', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+    // It's 3A, making a query to the database. updateRecord is interacting with this piece of code. The part of CRUD is UPDATE, since it is used to update data on the database.
     client.query(
         `UPDATE articles
         SET
@@ -115,6 +118,7 @@ app.put('/articles/:id', (request, response) => {
 app.delete('/articles/:id', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+    //118 to 124 is 3A server to database, lines 126-131 is 5A, server to client. deleteRecord is code interacting with this section.  This would be DELETE.  
     client.query(
         `DELETE FROM articles WHERE article_id=$1;`,
         [request.params.id]
