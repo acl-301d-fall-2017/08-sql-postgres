@@ -9,12 +9,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
-
+const pg = require('pg');
 // TODO DONE: Complete the connection string (conString) for the URL that will connect to your local Postgres database.
 
 // Windows and Linux users: You should have retained the user/password from the pre-work for this course.
 // Your OS may require that your conString is composed of additional information including user and password.
-const conString = 'postgres://postgres:postgres@HOST:5432/kilovolt';
+const conString = 'postgres://postgres:postgres@localhost:5432/kilovolt';
 
 // Mac:
 // const conString = 'postgres://localhost:5432';
@@ -23,7 +23,7 @@ const conString = 'postgres://postgres:postgres@HOST:5432/kilovolt';
 // TODO DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
 
-const client = new pg.Client('postgres://postgres:jenny@HOST:5432/kilovolt');
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
