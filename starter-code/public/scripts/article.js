@@ -13,7 +13,7 @@ function Article (rawDataObj) {
 Article.all = [];
 
 Article.prototype.toHtml = function() {
-    let template = Handlebars.compile($('#article-template').text());
+    const template = Handlebars.compile($('#article-template').text());
 
     this.daysAgo = parseInt((new Date() - new Date(this.publishedOn)) / 60 / 60 / 24 / 1000);
     this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';

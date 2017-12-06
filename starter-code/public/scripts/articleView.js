@@ -85,10 +85,9 @@ articleView.initNewArticlePage = () => {
 };
 
 articleView.create = () => {
-    let article;
     $('#articles').empty();
 
-    article = new Article({
+    const article = new Article({
         title: $('#article-title').val(),
         author: $('#article-author').val(),
         authorUrl: $('#article-author-url').val(),
@@ -102,9 +101,6 @@ articleView.create = () => {
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
-
-    $('#export-field').show();
-    $('#article-json').val(`${JSON.stringify(article)},`);
 };
 
 articleView.submit = event => {
