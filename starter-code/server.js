@@ -25,8 +25,8 @@ const pg = require('pg');
 
 // TODO-DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
-
-const client = new pg.Client('postgress://postgres:1234@localhost:5432/articles');
+const conString = 'postgress://postgres:1234@localhost:5432/kilovolt';
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -50,7 +50,12 @@ app.get('/new', (request, response) => {
 app.get('/articles', (request, response) => {
     // COMMENT-DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
+<<<<<<< HEAD
+    //It is 3A. The fetchAll method is doing the request. Read, because it is just reading a query selection of data from database.
+    //3A because it is a request from the server to database. Our understanding is that 3B would be on the database side which we aren't on. So 3A just denotes that it is 3 but on the server side of it. 
+=======
     //It is 3A. The fetchAll method is doing the request. READ, because it is just reading a query selection of data from database.
+>>>>>>> e615002adee063f91e43d83e07343d71b3646e5e
     client.query('SELECT * FROM articles')
         .then(function(result) {
             response.send(result.rows);
